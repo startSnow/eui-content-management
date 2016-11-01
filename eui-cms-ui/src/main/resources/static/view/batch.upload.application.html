@@ -1,0 +1,72 @@
+<div class="container">
+ <div class="modal-body">
+		<form class="form-horizontal" role="form" name="batchUploadApplicationForm" >
+		 
+		  <div class="form-group">
+		    <label for="region" class="col-sm-2 control-label">{{translation.DEVICE_TYPE}}</label>
+		    <div class="col-sm-4">
+			    <select name="deviceType" id="deviceType" ng-model="deviceType" required>
+			      	<option ng-repeat="option in deviceTypeData.availableOptions" value="{{option.id}}">{{option.name}}</option>
+			    </select>
+		    </div>
+		    <div ng-messages="batchUploadApplicationForm.deviceType.$error">
+			      <div ng-message="required" style="font: bold;color:red;"> {{translation.REQUIRED_FIELD}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="region" class="col-sm-2 control-label">{{translation.FILE}}</label>
+		    <div class="col-sm-4">
+         		<input type = "file" file-upload on-read-file="showContent($fileContent)" />
+		    </div>
+		    <div ng-messages="batchUploadApplicationForm.applicationFile.$error">
+			      <div ng-message="required" style="font: bold;color:red;"> {{translation.REQUIRED_FIELD}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		  	  <label for="region" class="col-sm-2 control-label">&nbsp;</label>
+		  	  <button type="button" ng-click="clearForm()" class="btn btn-primary" >{{translation.CANCEL}}</button>
+		      <button type="button" ng-click="uploadBatchApplications()" class="btn btn-primary" data-dismiss="modal" ng-disabled="!batchUploadApplicationForm.$valid"  >{{translation.UPLOAD}}</button>
+		  </div>
+		  
+		  <div ng-if="content">
+	        <h4>File content:</h4>
+	        <pre>{{content}}</pre>
+	     </div>
+		  
+		  <div ng-show="rowCollection != null">
+		  		<table st-table="rowCollection"  st-safe-src="rowCollection"   class="table table-striped" >
+					<thead>
+						<tr>
+							<th>{{translation.APPLICATIONS_TITLE}}</th>
+							<th>{{translation.DEVICE_TYPE}}</th>
+							<th>{{translation.APPLICATIONS_PACKAGE}}</th>
+							<th>{{translation.APPLICATIONS_COMPANY_NAME}}</th>
+							<th> {{translation.APPLICATIONS_ICON_URL}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="row in rowCollection">
+							<td>{{row.title}}</td>
+							<td>{{row.deviceType}}</td>
+							<td>{{row.packageName}}</td>
+							<td>{{row.companyName}}</td>
+							<td>
+								<div ng-show="row.iconUrl">
+									<img src="{{row.iconUrl}}" height="50px" width="50px" />
+								</div>
+								<div ng-show="row.bannerImageUrl">
+									<img src="{{row.bannerImageUrl}}" height="50px" width="50px" />
+								</div>
+								
+							</td>
+						</tr>
+					</tbody>
+				</table>
+		  </div>
+		</form>
+
+</div>
+ 
+</div>

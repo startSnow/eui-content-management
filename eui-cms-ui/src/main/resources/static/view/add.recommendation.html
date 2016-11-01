@@ -1,0 +1,75 @@
+<div class="modal fade">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="spinner" ng-show="loading">
+			 	<div class="loading">Loading&#8230;</div>
+			</div>
+			<div class="modal-header">
+				<button type="button" class="close" ng-click="close()"
+					data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">{{translation.ADD_RECOMMENDATION}}</h4>
+			</div>
+			<div class="alert alert-danger" id="alertMessage" ng-show="error"  >
+				<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+				<button type="button" class="close"
+					data-ng-click="alertMessage=''">×</button>
+				<span id="errorMessage">{{error}}</span>
+			</div>
+			<div class="alert alert-success" ng-show="successMessage">
+				<button type="button" class="close"
+					data-ng-click="successMessage=''">×</button>
+				<strong>Done!</strong> {{successMessage}}
+			</div>
+			<div class="modal-body">
+				<p>{{translation.RECOMMENDATION_DETAILS}}:</p>
+				<form class="form-horizontal" role="form">
+					<table st-table="rowCollection" class="table table-striped">
+						<thead>
+							<tr>
+								<th>{{translation.APPLICATIONS_TITLE}}</th>
+								<th>{{translation.APPLICATIONS_PACKAGE}}</th>
+								<th>{{translation.APPLICATIONS_COMPANY_NAME}}</th>
+								<th>{{translation.APPLICATIONS_ICON_URL}}</th>
+							</tr>
+							<tr>
+								<th><input type="text" class="form-control" ng-model="search.title"  /></th>
+								<th><input type="text" class="form-control" ng-model="search.packageName"   /></th>
+								<th colspan="2"><input class="form-control" type="text" ng-model="search.companyName" /></th>
+								<td align="center">
+					           		<button type="button" ng-click="search=''"
+										class="btn btn-success btn-sm active" > <i class="glyphicon glyphicon-refresh"> </i>
+									</button> 
+					           </td>  
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="row in rowCollection | filter:search">
+								<td>{{row.title}}</td>
+								<td>{{row.packageName}}</td>
+								<td>{{row.companyName}}</td>
+								<td>
+									<div ng-show="row.iconUrl">
+										<img src="{{row.iconUrl}}" height="50px" width="50px" />
+									</div>
+									<div ng-show="row.bannerImageUrl">
+										<img src="{{row.bannerImageUrl}}" height="50px" width="50px" />
+									</div>
+								</td>
+								<td>
+									<button class="btn btn-primary btn-sm" popover-placement="top" ng-click="addPriority(row)"  popover="{{row.id}}" type="button">
+										<i class="glyphicon glyphicon-plus"></i>
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				
+				</form>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" ng-click="cancel()" class="btn">{{translation.CANCEL}}</button>
+			</div>
+		</div>
+	</div>
+</div>

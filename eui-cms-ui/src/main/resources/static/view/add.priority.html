@@ -1,0 +1,59 @@
+<div class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="spinner" ng-show="loading">
+			 	<div class="loading">Loading&#8230;</div>
+	  </div>	
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{translation.ADD_RECOMMENDATION}}</h4>
+      </div>
+      <div class="alert" id="alertMessage" ng-show="error" class="ng-hide" >
+		<span class="closebtn"  ng-click="error=null" >&times;</span>
+		<span id="errorMessage">{{error}}</span>
+	  </div>	
+      <div class="modal-body">
+        <p>{{translation.UPDATE_PRIOIRTY}}:</p>
+
+		<form class="form-horizontal"  role="form" name="addPriorityForm" >
+		 
+		 <div class="form-group" >
+		    <label for="recommendationId" class="col-sm-2 control-label">{{translation.IDENTITY}}</label>
+		    <div class="col-sm-3">
+		    	<label>{{recommendationId}}</label>
+		    </div>
+		  </div>
+		  
+		  <div class="form-group" >
+		    <label for="priorityId" class="col-sm-2 control-label">{{translation.PRIORITY}}</label>
+		    <div class="col-sm-3">
+		      <input type="number" class="form-control" id="priorityId" name="priorityId" required ng-pattern="/^(\d)+$/"  required placeholder="{{translation.PRIORITY}}" min="0" max="127" ng-model="priorityId"> <label>Values between (0-127)</label>
+		    </div>
+		    <div ng-messages="addPriorityForm.priorityId.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="pattern" style="font: bold;color: red;">{{translation.ONLY_DIGITS}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.PRIORITY}} {{translation.TOO_LONG}}</div>
+			 </div>	
+		  </div>
+		  
+		  <div class="form-group" >
+		    <label for="sequenceId" class="col-sm-2 control-label">{{translation.SEQ_NUM}}</label>
+		    <div class="col-sm-3">
+		      <input type="number" class="form-control" id="sequenceId" name="sequenceId"  required ng-pattern="/^(\d)+$/"  required placeholder="{{translation.SEQ_NUM}}" min="0" ng-model="sequenceId">
+		    </div>
+		    <div ng-messages="addPriorityForm.sequenceId.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="pattern" style="font: bold;color: red;">{{translation.ONLY_DIGITS}}</div>
+			 </div>	
+		  </div>
+		 
+		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close()" class="btn btn-primary" ng-disabled="!addPriorityForm.$valid" data-dismiss="modal">{{translation.SAVE}}</button>
+        <button type="button" ng-click="cancel()" class="btn">{{translation.CANCEL}}</button>
+      </div>
+    </div>
+  </div>
+</div>

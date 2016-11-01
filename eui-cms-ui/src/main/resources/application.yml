@@ -1,0 +1,50 @@
+debug: true
+
+spring:
+  aop:
+    proxy-target-class: true
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false
+
+
+security:
+  user:
+    password: none
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:9999/eui-auth-server/oauth/token
+      userAuthorizationUri: http://localhost:9999/eui-auth-server/oauth/authorize
+      clientId: acme
+      clientSecret: acmesecret
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj8MmXj0i7MP3yPX6ZbCgRtHPcHohsGEBn9fiX0Z6tjsNsTJCKN+gMuRWGwHpV3IkOCIwkfevASLr+mV7MGDdwy+idOqltMeQxapBaUC51SNw3nFd4C77rsay2Xds+sFvbcxlfeyIl1EbR+WxVZXWzvjlSDDvYf4eQ+X4ntASRDKc+5FqwNQNSUZKxhWnYJskmd65K9XBcYkMGWY2QTM40IZbk8cdHx1b9znOgOHbL3SM7hIGP0rTG5ZFjTHt7sSOYOpzp3J9hEZ6tJYqrZ7+InAK3xkQzUMHH7txlBPB8TKNaOs2dZ7ZzpwY+BM0xZqDOZjwkhv+0IZ3yyYGNd6iPQIDAQAB
+          -----END PUBLIC KEY-----
+
+zuul:
+  routes:
+    resource:
+      path: /v1/store/**
+      url: http://localhost:9000/eui-store-api/v1/store
+    user:
+      path: /v1/user/**
+      url: http://localhost:9999/eui-auth-server/v1/user
+  trace-request-body: true
+ 
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.thymeleaf : DEBUG
+    
+endpoints:
+  cors:
+     allowed-origins: "*"
+     allowed-methods: GET, PUT, POST, DELETE, OPTIONS
+     allowed-headers: "*"
+     exposed-headers:
+     allow-credentials: true
+     max-age: 1800    

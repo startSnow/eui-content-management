@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title>CMS</title>
+<meta name="description" content="" /> 
+<meta name="viewport" content="width=device-width" />
+<base href="/" />
+<script type="text/javascript" src="/webjars/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/external/jquery-ui.min.js" th:src="@{js/external/jquery-ui.min.js}"></script>
+
+<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+<script type="text/javascript" src="../static/js/external/angular-ui.min.js" th:src="@{js/external/angular-ui.min.js}"></script>
+<script type="text/javascript" src="../static/js/external/angular-drag-and-drop-lists.min.js" th:src="@{js/external/angular-drag-and-drop-lists.min.js}"></script>
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.2.0/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+<script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/webjars/angular-messages/angular-messages.js"></script>
+<script type="text/javascript" src="/webjars/angular-modal-service/dst/angular-modal-service.min.js"></script>
+<script type="text/javascript" src="/webjars/angular-ui-router/angular-ui-router.min.js"></script>
+<script type="text/javascript" src="/webjars/angular-resource/angular-resource.min.js"></script>
+  
+<link href="/css/add.category.css" rel="stylesheet" />
+ 
+<script type="text/javascript" src="../static/js/app.js" th:src="@{js/app.js}"></script>
+<script type="text/javascript" src="../static/js/directive/custom.directive.js" th:src="@{js/directive/custom.directive.js}"></script>
+
+<script type="text/javascript" src="../static/js/controller/user.profile.js" th:src="@{js/controller/user.profile.js}"></script>
+<script type="text/javascript" src="../static/js/controller/utility.controller.js" th:src="@{js/controller/utility.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/list.applications.controller.js" th:src="@{js/controller/list.applications.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/list.categories.controller.js" th:src="@{js/controller/list.categories.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/add.category.controller.js" th:src="@{js/controller/add.category.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/add.application.controller.js" th:src="@{js/controller/add.application.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/list.recommendations.controller.js" th:src="@{js/controller/list.recommendations.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/add.recommendation.controller.js" th:src="@{js/controller/add.recommendation.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/add.priority.controller.js" th:src="@{js/controller/add.priority.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/update.recommendation.controller.js" th:src="@{js/controller/update.recommendation.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/user.logout.js" th:src="@{js/controller/user.logout.js}"></script>
+<script type="text/javascript" src="../static/js/service/translation.service.js" th:src="@{js/service/translation.service.js}"></script> 
+<script type="text/javascript" src="../static/js/controller/home.controller.js" th:src="@{js/controller/home.controller.js}"></script> 
+<script type="text/javascript" src="../static/js/controller/update.application.controller.js" th:src="@{js/controller/update.application.controller.js}"></script>
+<script type="text/javascript" src="../static/js/controller/batch.upload.application.controller.js" th:src="@{js/controller/batch.upload.application.controller.js}"></script>
+
+<script type="text/javascript" src="../static/js/controller/add.update.recommendations.controller.js" th:src="@{js/controller/add.update.recommendations.controller.js}"></script>
+
+
+
+ 
+</head>
+<body ng-app="app" ng-controller="HomePageController">
+
+	<nav class="navbar navbar-inverse" role="navigation">
+	    <div class="navbar-header">
+	        <a class="navbar-brand" ui-sref="#">{{translation.APP_TITLE}}</a>
+	    </div>
+	    <ul class="nav navbar-nav">
+	    	<li><a ui-sref="recommendationUI">{{translation.RECOMMENDATIONS}}</a></li>
+	    	<li><a ui-sref="categories">{{translation.CATEGORIES}}</a></li>
+	        <li><a ui-sref="applications">{{translation.APPLICATIONS}}</a></li>
+	        <li role="presentation" class="dropdown">
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"> {{translation.UTILITY}} <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu"  >
+		            <li><a ui-sref="utility">{{translation.TOKEN}}</a></li>
+        			<li><a ui-sref="upload">{{translation.UPLOAD}}</a></li>
+        			<li><a ui-sref="batchUpload">{{translation.BATCH_UPLOAD}}</a></li>
+        			<li><a ui-sref="recommendations">Recommendation UI</a></li>
+			    </ul>
+		  </li>
+	      
+	    </ul>
+	    <div class="navbar-header pull-right">
+	    
+	    	  <ul class="nav navbar-nav">
+		        <li class="navbar-text pull-left">{{translation.WELCOME}} {{username}}</li>
+		        <li class="dropdown pull-right">
+		          <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-haspopup="true" aria-expanded="false" role="button"  ><span class="glyphicon glyphicon-user"></span><b class="caret"></b></a>
+		          <ul class="dropdown-menu">
+		            <li><a ui-sref="profile">{{translation.PROFILE}}</a></li>
+		            <li><a  ui-sref="logout">{{translation.LOGOUT}}</a></li>
+		            <li><a ui-sref="about">{{translation.ABOUT}}</a></li>
+		          </ul>
+		        </li>
+		      </ul>
+		      
+	    </div>
+	</nav>
+	 
+	<div class="container">
+	    <div ui-view></div>
+	</div>
+
+	<div class="navbar navbar-inverse navbar-fixed-bottom">
+		<div class="container text-center">
+			 <p class="navbar-text col-md-12 col-sm-12 col-xs-12">&copy; {{translation.COPY_RIGHTS}}</p>
+		 </div>
+	</div>
+
+
+</body>
+</html>

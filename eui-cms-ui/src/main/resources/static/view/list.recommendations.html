@@ -1,0 +1,83 @@
+<div class="spinner" ng-show="loading">
+ 	<div class="loading">Loading&#8230;</div>
+</div>
+<div class="alert alert-danger" id="alertMessage" ng-show="error"  >
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<button type="button" class="close"
+		data-ng-click="alertMessage=''">×</button>
+	<span id="errorMessage">{{error}}</span>
+</div>
+<div class="alert alert-success" ng-show="successMessage">
+	<button type="button" class="close"
+		data-ng-click="successMessage=''">×</button>
+	<strong>Done!</strong> {{successMessage}}
+</div>
+
+<br/>
+<div>
+	<label for="id" class="col-sm-2 control-label">{{translation.CATEGORY_NAME}} :</label>
+	<select name="categoryId" id="categoryId" ng-model="selectedItem"
+		ng-change="loadRecommendations(selectedItem)" required
+		data-ng-options="option as option.deviceType + ' - ' + option.name  for option in categoryData">
+	</select>
+</div>
+<div style="float: right;">
+	<button type="button" class="btn btn-primary" ng-click="addNewRecommendation()" ><i class="glyphicon glyphicon-plus"></i>{{translation.ADD_RECOMMENDATION}}</button>
+</div>
+    
+<div ng-show="rowCollection != null">
+	<br></br>
+	<h4>{{translation.RECOMMENDATIONS}}</h4>
+	<div style="float: right;">
+		<button type="button" ng-click="resetSequence()" class="btn">{{translation.CANCEL}}</button>
+		<button type="button" class="btn btn-primary" ng-click="updateSequence()" > {{translation.UPDATE}}</button>
+	</div>
+	<table st-table="rowCollection" class="table table-striped" >
+		<thead>
+			<tr>
+				<th>{{translation.APPLICATIONS_TITLE}}</th>
+				<th>{{translation.APPLICATIONS_ICON_URL}}</th>
+				<th>{{translation.PRIORITY}}</th>
+				<th>{{translation.SEQ_NUM}}</th>
+			</tr>
+			<tr>
+	           <td><input type="text" class="form-control" ng-model="search.applilcation.title" /></td>
+	           <td>&nbsp;</td>
+	           <td><input type="text" class="form-control" ng-model="search.priority" /> </td>  
+	           <td><input type="text" class="form-control" ng-model="search.sequenceNumber" /> </td>  
+	           <td colspan="2" align="center">
+	           		<button type="button" ng-click="search=''"
+						class="btn btn-success btn-sm active" >
+						<i class="glyphicon glyphicon-refresh"> </i>
+					</button> 
+	           </td>  
+			</tr>
+		</thead>
+		<tbody ui:sortable ng:model="rowCollection">
+			<tr ng-repeat="row in rowCollection | orderBy:['priority' ,'sequenceNumber'] | filter:search " style="cursor: move;">
+				<td>{{row.applilcation.title}}</td>
+				 <td>
+					<div ng-show="row.applilcation.iconUrl">
+						<img src="{{row.applilcation.iconUrl}}" height="50px" width="50px" />
+					</div>
+					<div ng-show="row.applilcation.bannerImageUrl">
+						<img src="{{row.applilcation.bannerImageUrl}}" height="50px" width="50px" />
+					</div>
+				</td>  
+				<td>{{row.priority}}</td>
+				<td>{{row.sequenceNumber}}</td>
+				<td>
+					<button class="btn btn-sm" popover-placement="top" ng-click="updateRecommendation(row)"   type="button">
+						<i class="glyphicon glyphicon-pencil"></i>
+					</button>
+				</td>
+				<td>
+					<button type="button" ng-click="removeRow(row)"
+						class="btn btn-sm btn-danger" >
+						<i class="glyphicon glyphicon-remove-circle"> </i>
+					</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

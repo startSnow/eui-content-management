@@ -1,0 +1,16 @@
+<div class="alert" id="alertMessage" ng-show="error" class="ng-hide" >
+	<span class="closebtn"  ng-click="error=null" >&times;</span>
+	<span id="errorMessage">{{error}}</span>
+</div>
+<h3>{{translation.MY_PROFILE}}</h3>
+<p>
+<div>
+	<b> User Name :</b> <span ng-bind="user"></span>
+</div>
+<div>
+	<b> User Id :</b> <span ng-bind="id"></span>
+</div>
+<div>
+	<b> Email Address : </b> <span ng-bind="email"></span>
+</div>
+</p>

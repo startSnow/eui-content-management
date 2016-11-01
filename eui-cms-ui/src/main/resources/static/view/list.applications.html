@@ -1,0 +1,78 @@
+<div class="spinner" ng-show="loading">
+ <div class="loading">Loading&#8230;</div>
+</div>
+<div class="alert alert-danger" id="alertMessage" ng-show="error"  >
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<button type="button" class="close"
+	<span id="errorMessage">{{error}}</span>
+</div>
+<div class="alert alert-success" ng-show="successMessage">
+	<button type="button" class="close"
+		data-ng-click="successMessage=''">×</button>
+	<strong>Done!</strong> {{successMessage}}
+</div>
+<div style="float: right;">
+	<button type="button" class="btn btn-primary" ng-click="addNewApplication()" ><i class="glyphicon glyphicon-plus"></i>{{translation.APPLICATIONS_ADD_APPLICATION}}</button>
+</div>
+ 
+<table st-table="rowCollection"  st-safe-src="rowCollection"   class="table table-striped" >
+	<thead>
+		<tr>
+			<th>{{translation.APPLICATIONS_TITLE}}</th>
+			<th>{{translation.DEVICE_TYPE}}</th>
+			<th>{{translation.APPLICATIONS_PACKAGE}}</th>
+			<th>{{translation.APPLICATIONS_COMPANY_NAME}}</th>
+			<th> {{translation.APPLICATIONS_ICON_URL}}</th>
+		</tr>
+		<tr>
+			<th><input type="text" class="form-control" ng-model="search.title" /></th>
+			<th><input type="text" class="form-control" ng-model="search.deviceType" /></th>
+			<th><input type="text" class="form-control" ng-model="search.packageName" /></th>
+			<th colspan="1"><input class="form-control" type="text" ng-model="search.companyName" /></th>
+			<th>&nbsp;</th>
+			<td>
+           		<button type="button" ng-click="search=''"
+					class="btn btn-success btn-sm active" > 
+					<i class="glyphicon glyphicon-refresh"> </i>
+				</button> 
+           </td>
+           <th>&nbsp;</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in rowCollection | filter:search ">
+			<td>{{row.title}}</td>
+			<td>{{row.deviceType}}</td>
+			<td>{{row.packageName}}</td>
+			<td>{{row.companyName}}</td>
+			<td>
+				<div ng-show="row.iconUrl">
+					<img src="{{row.iconUrl}}" height="50px" width="50px" />
+				</div>
+				<div ng-show="row.bannerImageUrl">
+					<img src="{{row.bannerImageUrl}}" height="50px" width="50px" />
+				</div>
+				
+			</td>
+			<td>
+				<button class="btn btn-sm" popover-placement="top" ng-click="updateApplication(row)"   
+					type="button">
+					<i class="glyphicon glyphicon-pencil"></i>
+				</button>
+			</td>
+			<td>	
+				<button type="button" ng-click="removeRow(row)"
+					class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove-circle"> </i>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="5" class="text-center">  
+				<div st-pagination="" st-items-by-page="5" st-displayed-pages="7"></div>
+			</td>
+		</tr>
+	</tfoot>
+</table>

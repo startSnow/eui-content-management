@@ -1,0 +1,120 @@
+<div class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="spinner" ng-show="loading">
+		 	<div class="loading">Loading&#8230;</div>
+	  </div>
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{translation.APPLICATIONS_ADD_APPLICATION}}</h4>
+      </div>
+     <div class="alert" id="alertMessage" ng-show="error" class="ng-hide" >
+		<span class="closebtn"  ng-click="error=null" >&times;</span>
+		<span id="errorMessage">{{error}}</span>
+	</div>
+      <div class="modal-body">
+        <p>{{translation.ADD_APP_APP_DETAILS}}:</p>
+
+		<form class="form-horizontal" role="form" name="addApplicationForm" >
+		  
+		  <div class="form-group" >
+		    <label for="id" class="col-sm-2 control-label">{{translation.IDENTITY}}</label>
+		    <div class="col-sm-3">
+		    	<label>{{id}}</label>
+		    </div>
+		  </div>
+		  
+		   <div class="form-group" >
+		    <label for="packageName" class="col-sm-2 control-label">{{translation.APPLICATIONS_PACKAGE}}</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="packageName" name="packageName" ng-minlength="0" ng-maxlength="255" required placeholder="{{translation.APPLICATIONS_PACKAGE}}" ng-model="packageName">
+		    </div>
+		    <div ng-messages="addApplicationForm.packageName.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_PACKAGE}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_PACKAGE}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="region" class="col-sm-2 control-label">{{translation.DEVICE_TYPE}}</label>
+		    <div class="col-sm-4">
+			    <select name="deviceType" id="deviceType" ng-model="deviceType" required>
+			      	<option ng-repeat="option in deviceTypeData.availableOptions" value="{{option.id}}">{{option.name}}</option>
+			    </select>
+		    </div>
+		    <div ng-messages="addApplicationForm.deviceType.$error">
+			      <div ng-message="required" style="font: bold;color:red;"> {{translation.REQUIRED_FIELD}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group" >
+		    <label for="companyName" class="col-sm-2 control-label">{{translation.APPLICATIONS_COMPANY_NAME}}</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="companyName" name="companyName" ng-minlength="0" ng-maxlength="100"  placeholder="{{translation.APPLICATIONS_COMPANY_NAME}}" ng-model="companyName">
+		    </div>
+		    <div ng-messages="addApplicationForm.companyName.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_COMPANY_NAME}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_COMPANY_NAME}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="title" class="col-sm-2 control-label">{{translation.APPLICATIONS_TITLE}}</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="title" name="title" ng-minlength="0" ng-maxlength="100"  required placeholder="{{translation.APPLICATIONS_TITLE}}" ng-model="title">
+		    </div>
+		    <div ng-messages="addApplicationForm.title.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_TITLE}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_TITLE}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="bannerImageUrl" class="col-sm-2 control-label">{{translation.APPLICATIONS_BANNER_IMG_URL}}</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" id="bannerImageUrl" name="bannerImageUrl" ng-minlength="0" ng-maxlength="255"  placeholder="{{translation.APPLICATIONS_BANNER_IMG_URL}}" ng-model="bannerImageUrl">
+		    </div>
+		    <div ng-messages="addApplicationForm.bannerImageUrl.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_BANNER_IMG_URL}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_BANNER_IMG_URL}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="iconUrl" class="col-sm-2 control-label">{{translation.APPLICATIONS_ICON_URL}}</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" id="iconUrl" name="iconUrl" ng-minlength="0" ng-maxlength="255"  placeholder="{{translation.APPLICATIONS_ICON_URL}}" ng-model="iconUrl">
+		    </div>
+		    <div ng-messages="addApplicationForm.iconUrl.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_ICON_URL}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_ICON_URL}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="bigImageUrl" class="col-sm-2 control-label">{{translation.APPLICATIONS_BIG_IMG_URL}}</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" id="bigImageUrl" name="bigImageUrl" ng-minlength="0" ng-maxlength="255"  placeholder="{{translation.APPLICATIONS_BIG_IMG_URL}}" ng-model="bigImageUrl">
+		    </div>
+		    <div ng-messages="addApplicationForm.bigImageUrl.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_BIG_IMG_URL}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_BIG_IMG_URL}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		 
+		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close()" class="btn btn-primary" data-dismiss="modal" ng-disabled="!addApplicationForm.$valid"  >{{translation.SAVE}}</button>
+        <button type="button" ng-click="cancel()" class="btn">{{translation.CANCEL}}</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="spinner" ng-show="loading">
+ 	<div class="loading">Loading&#8230;</div>
+</div>
+<div class="alert alert-danger" id="alertMessage" ng-show="error"  >
+	<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	<button type="button" class="close"
+		data-ng-click="alertMessage=''">×</button>
+	<span id="errorMessage">{{error}}</span>
+</div>
+<div class="alert alert-success" ng-show="successMessage">
+	<button type="button" class="close"
+		data-ng-click="successMessage=''">×</button>
+	<strong>Done!</strong> {{successMessage}}
+</div>
+
+<div style="float: right;">
+	<button type="button" class="btn btn-primary" ng-click="addNewCategory()" ><i class="glyphicon glyphicon-plus"></i>{{translation.ADD_CATEGORY}}</button>
+</div>
+
+ 
+<table st-table="rowCollection" class="table table-striped">
+	<thead>
+		<tr>
+			<th>{{translation.CATEGORY_NAME}}</th>
+			<th>{{translation.DEVICE_TYPE}}</th>
+			<th>{{translation.APPLICATIONS_ICON_URL}}</th>
+		</tr>
+		<tr>
+			<th><input type="text" class="form-control" ng-model="search.name" /></th>
+			<th><input type="text" class="form-control" ng-model="search.deviceType" /></th>
+			<th>&nbsp;</th>
+			<th align="center">
+           		<button type="button" ng-click="search=''"
+					class="btn btn-success btn-sm active" >  
+					<i class="glyphicon glyphicon-refresh"> </i>
+				</button> 
+           </th> 
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="row in rowCollection | filter:search">
+			<td>{{row.name}}</td>
+			<td>{{row.deviceType}}</td>
+			<td>
+				<div ng-show="row.iconUrl">
+					<img  src="{{row.iconUrl}}" height="50px" width="50px" />
+				</div>
+			</td>
+			<td>
+				<button type="button" ng-click="removeRow(row)"
+					class="btn btn-sm btn-danger">
+					<i class="glyphicon glyphicon-remove-circle"> </i>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+ 

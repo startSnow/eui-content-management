@@ -1,0 +1,9 @@
+<div style="padding-bottom: 40px;">
+	<b>{{translation.TOKEN}} :</b> <span ng-bind="query" id="queryDiv"> </span>
+</div>
+<div></div>
+<input type="button" value="{{translation.GENERATE}}" class="btn btn-primary"
+	ng-click="generateParameters()" />
+<input type="button" value="{{translation.CLEAR}}" class="btn btn-primary"
+	onclick="document.getElementById('queryDiv').innerHTML=''" />
+<br />

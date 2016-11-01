@@ -1,0 +1,79 @@
+<div class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+   	  <div class="spinner" ng-show="loading">
+		 	<div class="loading">Loading&#8230;</div>
+	  </div>
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close()" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">{{translation.ADD_CATEGORY}}</h4>
+      </div>
+      <div class="alert" id="alertMessage" ng-show="error" class="ng-hide" >
+		<span class="closebtn"  ng-click="error=null" >&times;</span>
+		<span id="errorMessage">{{error}}</span>
+	</div>
+      <div class="modal-body">
+        <p>{{translation.CATEGORY_DETAILS}}:</p>
+
+		<form class="form-horizontal" role="form" name="addCategoryForm" >
+		  <div class="form-group" >
+		    <label for="id" class="col-sm-2 control-label">{{translation.IDENTITY}}</label>
+		    <div class="col-sm-3">
+		    	<label>{{id}}</label>
+		    </div>
+		  </div>
+		  <div class="form-group" ng-class="{'has-error': categoryName.$invalid}">
+		    <label for="categoryName" class="col-sm-2 control-label">{{translation.CATEGORY_NAME}}</label>
+		    <div class="col-sm-3">
+		      <input type="text" class="form-control" id="categoryName" name="categoryName" ng-minlength="0" ng-maxlength="100" required placeholder="{{translation.CATEGORY_NAME}}" ng-model="categoryName">
+		    </div>
+		   <div ng-messages="addCategoryForm.categoryName.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.CATEGORY_NAME}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.CATEGORY_NAME}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="iconUrl" class="col-sm-2 control-label">{{translation.APPLICATIONS_ICON_URL}}</label>
+		    <div class="col-sm-6">
+		      <input type="text" class="form-control" id="iconUrl" name="iconUrl" ng-minlength="0" ng-maxlength="255" required  placeholder="{{translation.APPLICATIONS_ICON_URL}}" ng-model="iconUrl">
+		    </div>
+		     <div ng-messages="addCategoryForm.iconUrl.$error">
+			      <div ng-message="required" style="font: bold;color: red;">{{translation.REQUIRED_FIELD}}</div>
+			      <div ng-message="minlength" style="font: bold;color: red;">{{translation.APPLICATIONS_ICON_URL}} {{translation.TOO_SHORT}}</div>
+			      <div ng-message="maxlength" style="font: bold;color: red;">{{translation.APPLICATIONS_ICON_URL}} {{translation.TOO_LONG}}</div>
+			 </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="region" class="col-sm-2 control-label">{{translation.REGION}}</label>
+		    <div class="col-sm-4">
+		    	<select name="region" id="region" ng-model="region" required>
+			      	<option ng-repeat="option in regionData.availableOptions"  value="{{option.regionId}}">{{option.regionName}}</option>
+			    </select>
+		    </div>
+		    <div ng-messages="addCategoryForm.region.$error">
+			      <div ng-message="required" style="font: bold;color:red;"> {{translation.REQUIRED_FIELD}}</div>
+			 </div>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="region" class="col-sm-2 control-label">{{translation.DEVICE_TYPE}}</label>
+		    <div class="col-sm-4">
+			    <select name="deviceType" id="deviceType" ng-model="deviceType" required>
+			      	<option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+			    </select>
+		    </div>
+		    <div ng-messages="addCategoryForm.deviceType.$error">
+			      <div ng-message="required" style="font: bold;color:red;"> {{translation.REQUIRED_FIELD}}</div>
+			 </div>
+		  </div>
+		</form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close(addCategoryForm.$valid)" class="btn btn-primary" class="btn btn-danger" data-dismiss="modal"  ng-disabled="!addCategoryForm.$valid" >{{translation.SAVE}}</button>
+        <button type="button" ng-click="cancel()" class="btn" >{{translation.CANCEL}}</button>
+      </div>
+    </div>
+  </div>
+</div>
